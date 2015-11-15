@@ -1,0 +1,113 @@
+package ce210.lists;
+import ce210.lists.*;
+
+public class SinglyNodeListCircular<T> {
+	protected int nofelements;
+	protected SNode<T> head, tail;
+
+	public SinglyNodeListCircular() {
+		nofelements = 0;
+		head = tail = null;
+	}
+
+ 	 //returns the number of stored elements in list.  
+	 public int size() {
+    	return nofelements;
+ 	 }
+
+ 	 /**
+  	 * Checks whether the list is empty.
+  	 */
+ 	 public boolean isEmpty() {
+   		return (nofelements < 1);
+ 	 }
+
+ 	 /**
+ 	  * Checks whether the provided node is the first node in list.
+  	 */
+ 	 public boolean isFirst(SNode<T> v) {
+   		return v == head;
+ 	 }
+
+ 	 /**
+  	 * Returns the first node of the list.
+  	 */
+ 	 public SNode<T> first() {
+   		 if( isEmpty() ) {
+     		 System.out.println("List is empty");
+    	 }
+   		 return head;
+ 	 }
+
+  /**
+   * Returns the last node of the list.
+   */
+ 	 public SNode<T> last() {
+   		 if( isEmpty() ) {
+     		 System.out.println("List is empty");
+   		 }
+   	 	 return tail;
+ 	 }
+
+	//insert element in the end of the list
+ 	public SNode<T> insertLast(T element){
+		if (!isEmpty()){
+			return insertAfter ( last() , element);
+		}
+		else{
+			return insertFirst(element);
+		}
+	}
+
+	//insert element after node p
+	public SNode<T> insertAfter(SNode<T> p, T element ){
+		if (isEmpty()){
+			System.out.println("List is empty.Not allowed to use \"insertAfter\" function ");
+			return null;
+		}
+		nofelements++;
+		SNode<T> q = new SNode<T>(p.getNext(), element);
+		if (p.getNext() == head){
+			tail = q;	
+		}
+		p.setNext(q);
+		return q;
+	}
+
+	//insert element at the beginning of the list
+	public SNode<T> insertFirst(T element){
+		//when the list is empty head == null
+		SNode<T> q = new SNode<T>(head,element);
+		head = q;
+		q.setNext(head);
+		if (nofelements == 0){
+			head = tail;
+		}
+		nofelements++;
+		return q;
+	}
+
+	public String toString() {
+		String str="";
+    	if( isEmpty() ) {
+   		str = "List is empty\n";
+      		return str;
+    	}
+    	SNode<T> p = first();
+    	for (int i=0; i<nofelements; i++) {
+		System.out.println("nofelement: " + nofelements);
+      		str += p.getElement().toString()+"\n";
+      		p = p.getNext();
+    	}
+    	return str;
+  	}
+  
+  	/**
+   	* Print the elements of the list in standard output.
+   	*/
+  	public void printList() {
+    		System.out.println( toString() );
+  	}
+
+	
+}
