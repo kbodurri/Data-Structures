@@ -1,0 +1,22 @@
+<project>
+
+  <target name="clean">
+    <delete dir="build"/>
+    <mkdir dir="build/jar"/>
+    <mkdir dir="build/classes"/>
+  </target>
+
+  <target name="build">
+    <javac srcdir="src" sourcepath="src" destdir="build/classes">
+      <!--compilerarg value="-Xlint"/-->
+    </javac>
+  </target>
+
+  <target name="jar" depends="build">
+    <jar destfile="build/jar/ce210_library.jar" basedir="build/classes" includes="ce210/**" excludes="">
+    </jar>
+  </target>
+
+  <target name="all" depends="jar"/>
+
+</project>
