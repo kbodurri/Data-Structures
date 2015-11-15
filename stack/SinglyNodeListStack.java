@@ -14,7 +14,7 @@ public class SinglyNodeListStack<T> extends SinglyNodeList{
 		if (isEmpty()){
 			System.out.println("Stack is empty");
 		}
-		return null;
+		return delete(0).getElement();
 	}
 
 	//top
