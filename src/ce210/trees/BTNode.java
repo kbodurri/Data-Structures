@@ -53,10 +53,22 @@ public class BTNode<T> {
       str += getLeft().toString();
     }
     if( getRight() != null ) {
-      str += getLeft().toString();
+      str += getRight().toString();
     }
     return str;    
-  } 
-
+  }
+  
+  public String dotString() {
+    String str = element + " [shape=circle, color=black]\n";
+    if(left!=null) {
+      str += element +" -> "+ left.getElement()+"\n";
+      str += left.dotString();
+    }
+    if(right!=null) {
+      str += element +" -> "+ right.getElement()+"\n";
+      str += right.dotString();
+    }
+    return str;
+  }
 
 }

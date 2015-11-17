@@ -16,13 +16,13 @@ class TestStack {
     stack.push( data.getNext() );
     System.out.println("Printing Stack (size:"+stack.size()+")");
     System.out.println(stack.toString());
-/*
+
     System.out.println("Printing Poped Element");
     System.out.println(stack.pop().toString());
 
     System.out.println("Printing Poped Element");
     System.out.println(stack.pop().toString());
-*/
+
     System.out.println("\nPrinting Stack (size:"+stack.size()+")\n");
     System.out.println(stack.toString());
 

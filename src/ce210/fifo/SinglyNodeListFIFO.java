@@ -8,32 +8,14 @@ public class SinglyNodeListFIFO<T> extends SinglyNodeList {
 
 	//enqueue
 	public void enqueue(T element){
-		SNode<T> x = new SNode<T>(null,element);
-		if (isEmpty()){
-			head = tail = x;
-		}
-		else{
-			tail.setNext(x);
-			tail = x;
-			nofElements++;
-		}
+		insertLast(element);	
 	}
 
 	public T dequeue(){
-		SNode<T> tmp;
-
 		if (isEmpty()){
 			System.out.println("Fifo is empty.");
 			return null;
-		}
-		
-		tmp = head;
-		head = head.getNext();
-		tmp.setNext(null);
-		nofElements--;
-		if (nofElements==0){
-			tail = null;
-		}
-		return tmp.getElement();
+		} 	
+		return (T)deleteFirst();
 	}
 }
