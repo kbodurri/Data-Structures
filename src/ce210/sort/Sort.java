@@ -1,11 +1,20 @@
 package ce210.sort; 
 
 public class Sort <T extends Comparable> {
+  
+  public int counter_cmp,counter_switch;
+
+  public Sort(){
+  	counter_cmp = 0;
+	counter_switch = 0;
+  }		  
 
   public void insertionSort(T a[], int left, int right) {
    
     for(int i=right; i>left; i--) {
+	  counter_cmp++;
       if( a[i].compareTo(a[i-1])<0 ) {
+		counter_switch++;
         T temp = a[i];
         a[i] = a[i-1];
         a[i-1] = temp;
@@ -16,9 +25,12 @@ public class Sort <T extends Comparable> {
       int j = i;
       T v=a[i];
       while( v.compareTo(a[j-1])<0 ) {
+		counter_cmp++;
+		counter_switch++;
         a[j] = a[j-1];
         j--;
       }
+	  counter_cmp++;
       a[j] = v;
     }
   }
@@ -28,10 +40,12 @@ public class Sort <T extends Comparable> {
     for(int unorderedleft = left; unorderedleft < right; unorderedleft++) {
       int min = unorderedleft;
       for( int j = unorderedleft+1; j<=right; j++) {
+		counter_cmp++;
         if( a[j].compareTo(a[min])<0 ) {
           min = j;
         }
       }
+	  counter_switch++;
       temp = a[unorderedleft];
       a[unorderedleft] = a[min];
       a[min] = temp;
@@ -42,7 +56,9 @@ public class Sort <T extends Comparable> {
     T temp;
     for(int i=left; i<right; i++) {
       for(int j=right; j>i; j--) {
+		counter_cmp++;
         if( a[j].compareTo(a[j-1])<0 ) {
+		  counter_switch++;
           temp = a[j-1];
           a[j-1] = a[j];
           a[j] = temp;
@@ -57,22 +73,27 @@ public class Sort <T extends Comparable> {
     while(left < right) {
       if(leftdirection) {
         leftdirection = !leftdirection;
-        for(int j=right; j>left; j--)
+        for(int j=right; j>left; j--){
           if( a[j].compareTo(a[j-1])<0 ) {
+			counter_switch++;
             temp = a[j-1];
             a[j-1] = a[j];
             a[j] = temp;
           }
+		}
         left++;
       }
       else {
         leftdirection = !leftdirection;
-        for(int j=left; j<right; j++)
+        for(int j=left; j<right; j++){ 
+		  counter_cmp++;
           if( a[j+1].compareTo(a[j])<0 ) {
+			counter_switch++;
             temp = a[j+1];
             a[j+1] = a[j];
             a[j] = temp;
           }
+		}
         right--;
       }
     }
@@ -82,19 +103,23 @@ public class Sort <T extends Comparable> {
     int i=left-1, j=right;
     T temp, o = a[right];
     while(true) {
-      while( a[++i].compareTo(o)<0 ) 
-        ;
+      while( a[++i].compareTo(o)<0 )
+		counter_cmp++;
       while( o.compareTo(a[--j])<0 )
+		counter_cmp++;
         if( j==left )
           break;
       if( i>= j)
         break;
-
+	  
+	  counter_cmp = counter_cmp + 2;
+	  counter_switch++;
       temp = a[i];
       a[i] = a[j];
       a[j] = temp;
     }
 
+    counter_switch++;
     temp = a[i];
     a[i] = a[right];
     a[right] = temp;
@@ -110,11 +135,14 @@ public class Sort <T extends Comparable> {
     while(2*k+1 <= N) {
       int maxson = 2*k+1;
       T temp;
+	  counter_cmp++;
       if( maxson < N && a[maxson].compareTo(a[maxson+1]) < 0 ) {
         maxson++;
       }
+	  counter_cmp++;
       if(a[maxson].compareTo(a[k]) < 0 )
         break;
+	  counter_switch++;
       temp = a[k];
       a[k] = a[maxson];
       a[maxson] = temp;
@@ -130,6 +158,7 @@ public class Sort <T extends Comparable> {
       makeHeap(a, k, right);
 
     while(right > left) {
+	  counter_switch++;
       temp = a[left];
       a[left] = a[right];
       a[right] = temp;
@@ -148,23 +177,32 @@ public class Sort <T extends Comparable> {
     }
     
     for(l=left; l<middle+1; l++) {
+	  counter_switch++;
       b[l] = a[l];
     }
     l = left;
     for(r=middle; r<right; r++) {
+	  counter_switch++;
       b[right+middle-r] = a[r+1];
     }
 
     for(int k=left; k<=right; k++) {
+	  counter_cmp++;
       if(b[r].compareTo(b[l]) < 0 ) {
+	  	counter_switch++;
         a[k] = b[r--];
       } else {
+		counter_switch++;
         a[k] = b[l++];
       }
     }    
     
   }
-
+ 
+ public void printResults(){
+	System.out.println("Counter for compares: " + counter_cmp);
+	System.out.println("Counter for swaps: " + counter_switch);
+ }
 
 
 }
