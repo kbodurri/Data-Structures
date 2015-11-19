@@ -199,10 +199,11 @@ public class Sort <T extends Comparable> {
     
   }
  
- public void printResults(){
-	System.out.println("Counter for compares: " + counter_cmp);
-	System.out.println("Counter for swaps: " + counter_switch);
- }
+  public int  printCompare(){
+	return counter_cmp;
+  }
 
-
+  public int  printSwaps(){
+	return counter_switch;
+  } 
 }
